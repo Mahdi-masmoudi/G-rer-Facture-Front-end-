@@ -1,0 +1,80 @@
+<!-- create.component.html -->
+
+<div class="container mt-5">
+  <br /><br />
+  <br /><br />
+
+  <form (submit)="ajoutFacture()" class="needs-validation" novalidate>
+    <!-- create.component.html -->
+
+    <div class="form-group">
+      <div class="form-group">
+        <label for="datefac">Facture Date:</label>
+        <input
+          type="datetime-local"
+          class="form-control"
+          id="datefac"
+          name="datefac"
+          [(ngModel)]="facture.datefac"
+          required
+          [value]="getCurrentDate()"
+          disabled
+        />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="somprix">Total Amount:</label>
+      <input
+        type="number"
+        class="form-control"
+        id="somprix"
+        name="somprix"
+        [(ngModel)]="facture.somprix"
+        required
+        readonly
+      />
+    </div>
+
+    <!-- Iterate over each product -->
+    <!-- create.component.html -->
+
+    <!-- Iterate over each product -->
+    <div
+      *ngFor="let product of facture.produits; let i = index"
+      class="form-group"
+    >
+      <label for="quantiter{{ i }}"
+        >Quantity for {{ product.designation }}:</label
+      >
+      <img [src]="product.image" alt="Product Image" style="width: 100px" />
+
+      <input
+        type="number"
+        class="form-control"
+        [id]="'quantiter' + i"
+        [name]="'quantiter' + i"
+        [(ngModel)]="product.quantity"
+        required
+        (input)="updateTotalAmount()"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="produit">Products:</label>
+      <select
+        class="form-control"
+        id="produit"
+        name="produit"
+        [(ngModel)]="facture.produits"
+        multiple
+      >
+        <option *ngFor="let product of products" [value]="product">
+          {{ product.designation }} : {{ product.prix }}
+        </option>
+      </select>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-dark">Add Facture</button>
+  </form>
+</div>

@@ -1,0 +1,73 @@
+<button type="button" class="btn btn-success" (click)="openModal()">
+  <i class="bi bi-plus-circle-fill"></i>
+  Nouveau Specialite
+</button>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{ display: display }">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Ajout specialite</h4>
+        <button
+          type="button"
+          class="btn btn-default"
+          aria-label="Close"
+          (click)="closeModal()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <template *ngTemplateOutlet="categorieform"></template>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="closeModal()">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Form -->
+<ng-template #categorieform>
+  <form (ngSubmit)="create()">
+    <div class="mb-3">
+      <input
+        type="text"
+        class="form-control"
+        id="nom"
+        name="Nom specialite"
+        placeholder="quantite"
+        [(ngModel)]="Detail.quantite"
+      />
+      <input
+        type="text"
+        class="form-control"
+        id="nom"
+        name="Nom specialite"
+        placeholder="prix"
+        [(ngModel)]="Detail.prix"
+      />
+      <div class="mb-3">
+        Designation Produit:
+        <select
+          name="designation"
+          class="form-control"
+          [(ngModel)]="Detail.produit"
+        >
+          <option *ngFor="let sd of products" value="{{ sd._id }}">
+            {{ sd.designation }}
+          </option>
+        </select>
+      </div>
+      <br />
+    </div>
+
+    <div>
+      <button type="submit" class="btn btn-success" (click)="create()">
+        Enregistrer
+      </button>
+    </div>
+  </form>
+</ng-template>

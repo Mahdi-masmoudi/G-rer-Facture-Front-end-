@@ -1,0 +1,29 @@
+<br />
+<br />
+<br /><br />
+
+<br />
+<app-create></app-create>
+
+<br />
+<div class="row card-deck">
+  <div class="col-lg-4 col-md-6 mb-4" *ngFor="let product of products">
+    <div class="card text-center">
+      <div class="card-header">
+        <h4>{{ product.designation }}</h4>
+      </div>
+      <div class="card-body">
+        <img [src]="product.image" alt="Product Image" style="width: 150px" />
+        <h5 class="card-title">{{ product.prix }} TND</h5>
+        <h5 class="card-title">Quantiter : {{ product.quantite }}</h5>
+      </div>
+    </div>
+    <button
+      type="button"
+      (click)="deleteProduct(product.id)"
+      class="btn btn-default"
+    >
+      <i class="bi bi-trash-fill" style="color: red"></i>
+    </button>
+  </div>
+</div>
